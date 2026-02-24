@@ -11,30 +11,63 @@ from PySide6.QtWidgets import(
     QLineEdit,
     QPushButton
 )
+class TelaCadastro():
+    def __init__(self):
+        self.app = QApplication(sys.argv)
+        self.janela = QWidget()
+        self.layout = QVBoxLayout()
+        
+        self.labels = []
+        self.campos = []
+        
+        self.janela.setWindowTitle("Cadastro Aluno")
+        self.janela.resize(1200, 600)
+        
+    def criar_componentes(self):
+        self.labels.append(QLabel("Digite um nome:"))
+        self.labels.append(QLabel("Digite um email:"))
+        self.labels.append(QLabel("Digite um cpf:"))
+        self.labels.append(QLabel("Digite um telefone:"))
+        self.labels.append(QLabel("Digite um endereço:"))
+          
+        for label in self.labels:
+            self.layout.addWidget(label)
+            
+            campo = QLineEdit()
+            self.campos.append(campo)
+            self.layout.addWidget(campo)
+            
+        botao_Cadastro = QPushButton("Cadastrar")
+        self.layout.addWidget(botao_Cadastro)
+        
+        self.janela.setLayout(self.layout)
+        botao_Cadastro.clicked.connect(self.cadastrar)
+            
+             
+
+    def cadastrar():
+        aluno = Aluno(
+            campo_nome.text(),
+            campo_email.text(),
+            campo_cpf.text(),
+            campo_telefone.text(),
+            campo_endereco.text()
+        )
+    
+        banco = MySQL()
+        banco.connect()
+    
+        aluno.cadastrar(banco)
+    
+        banco.disconnect()
  
-def cadastro():
-    aluno = Aluno(
-        campo_nome.text(),
-        campo_email.text(),
-        campo_cpf.text(),
-        campo_telefone.text(),
-        campo_endereco.text()
-    )
-   
-    banco = MySQL()
-    banco.connect()
-   
-    aluno.cadastrar(banco)
-   
-    banco.disconnect()
+#app = QApplication(sys.argv)
  
-app = QApplication(sys.argv)
+#janela = QWidget()
+#janela.setWindowTitle("Cadastro Aluno")
+#janela.resize(1200, 600)
  
-janela = QWidget()
-janela.setWindowTitle("Cadastro Aluno")
-janela.resize(1200, 600)
- 
-layout = QVBoxLayout()
+#layout = QVBoxLayout()
  
 #Componentes
 label_nome = QLabel("Digite seu nome: ")
@@ -55,22 +88,6 @@ campo_endereco = QLineEdit()
 botao = QPushButton("Cadastrar")
  
 #Adicionar componentes a janela
-layout.addWidget(label_nome)
-layout.addWidget(campo_nome)
- 
-layout.addWidget(label_email)
-layout.addWidget(campo_email)
- 
-layout.addWidget(label_cpf)
-layout.addWidget(campo_cpf)
- 
-layout.addWidget(label_telefone)
-layout.addWidget(campo_telefone)
- 
-layout.addWidget(label_enedereco)
-layout.addWidget(campo_endereco)
- 
-layout.addWidget(botao)
  
 janela.setLayout(layout)
  
