@@ -1,23 +1,26 @@
-# Projeto universidade 
-Modelagem em Orientação à objetos das Entidades Alunos,cursos e turmas.
-
-## Casos de usos
-
+# Projeto Universidade
+ 
+Modelagem em Orientação à Objetos
+das Entidades Alunos, Cursos e Turmas.
+ 
+## Caso de Uso
 ```mermaid
 flowchart LR
-    Usuario([Secretaria])
-    UC1((Cadastrar ALunos))
+    Usuário([Secretaria])
+ 
+    UC1((Cadastrar Alunos))
     UC2((Editar Alunos))
-    UC3((Transferir Aluno))
-    Usuario --> UC1
-    Usuario --> UC2
-    Usuario --> UC3
+    UC3((Transferir Alunos))
+ 
+    Usuário --> UC1
+    Usuário --> UC2
+    Usuário --> UC3
 ```
-
+ 
 ## Diagrama de Classes
 ```mermaid
- classDiagram
-    class Aluno{
+classDiagram
+    class Aluno {
         - nome
         - email
         - cpf
@@ -29,6 +32,43 @@ flowchart LR
         + transferir()
     }
 ```
+ 
+## Diagrama de Sequência - **Cadastro**
+```mermaid
+sequenceDiagram
+    participant UI as TelaCadastro
+    participant Entidade as Aluno
+    participant DB as MySQL
+    participant Banco as MySQL Server
+ 
+    UI ->> Entidade: cria Aluno(...)
+    UI ->> DB: connect()
+    UI ->> Entidade: cadastrar(DB)
+    Entidade ->> DB: execute_query(INSERT)
+    DB ->> Banco: Envia SQL
+    Banco -->> DB: Confirmação
+    DB -->> Entidade: lastrowid
+    UI ->> DB: disconnect()
+```
+## Diagrama de Sequência - **Listagem**
+```mermaid
+sequenceDiagram
+    participant UI as TelaListagem
+    participant Entidade as Aluno
+    participant DB as MySQL
+    participant Banco as MySQL Server
+ 
+    UI ->> DB: connect()
+    UI ->> Entidade: listar(DB)
+    Entidade ->> DB: execute_query(SELECT)
+    DB ->> Banco: Envia SQL (SELECT)
+    Banco -->> DB: Retorna registros
+    DB -->> Entidade: lista de alunos
+    Entidade -->> UI: lista de alunos
+    UI ->> UI: preencher QTableWidget
+    UI ->> DB: disconnect()
+```
+ 
 # Funções MySQL
  
 - CREATE - Cria tabelas dentro da base de dados.
@@ -39,15 +79,15 @@ flowchart LR
 - DROP - Exclui a tabela ou a base de dados inteira.
 - DELETE - Exclui registros dentro das tabelas.
  
-# Conceitos MySQL
+## Conceitos MySQL
  
 - Banco de Dados: Programa hospedado na máquina com objetivo de persistir dados fisicamente no HD.
 - Base de Dados: Conjunto de tabelas.
 - Tabelas: Conjunto de Registros.
 - Registros: Uma linha na tabela, contendo a informação dos seus atributos.
 - Atributos: Uma das caracteristicas da tabela (Colunas).
-
-# Bibliotecas Python
+ 
+## Bicliotecas Python
  
 Este é um projeto desktop, utilizando as tecnologias:
  
@@ -55,9 +95,10 @@ Este é um projeto desktop, utilizando as tecnologias:
 - PySide6
 - PyInstaller
  
- ## Dependências
-- **VSCode:**  IDE (Interface de Desenvolvimento)
-- **Mermaid:** Linguagem para confecção de Diagramas em documentos MD (Mark Down)
+## Dependências
+- **VSCode:** IDE (Interface de Desenvolvimento).
+- **Mermaid:** Linguagem para confecção de Diagramas em documentos MD(Mark Down).
 - **Material Icon Theme:** Tema para colorir as pastas.
-- **Git Lens:** Interface gráfica para o versionamento git integrado ao VSCode.
-- **MySQL:** SGBD (Sistema Gerenciador de Banco de Dados). Permite conectar o usuario com o servidor MySQL possibilitanto criar bases de dados,tabelas, incluir e modificar atributos  e registros.
+- **Git Lens:** Interface gráfica para o versionamento git integrada ao VSCode.
+- **MySQL:** SGBD (Sistema Gerenciador de Banco de Dados). Permite conectar o usuário com o servidor MySQL, possibilitando criar bases de dados, tabelas, incluir e modificar atributos e registros.
+ 
