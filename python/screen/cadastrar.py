@@ -33,6 +33,43 @@ class Cadastrar:
         self.janela.setMinimumSize(400, 500)
         self.janela.setLayout(self.layout)
 
+        # 🎨 Estilo da interface
+        self.janela.setStyleSheet("""
+            QWidget {
+                background-color: #fbcfe8;
+                font-size: 14px;
+            }
+
+            QLabel {
+                font-weight: bold;
+                margin-top: 5px;
+            }
+
+            QLineEdit {
+                padding: 6px;
+                border-radius: 6px;
+                border: 1px solid #f472b6;
+                background-color: white;
+            }
+
+            QPushButton {
+                background-color: #db2777;
+                color: white;
+                padding: 10px;
+                border-radius: 8px;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            QPushButton:hover {
+                background-color: #be185d;
+            }
+
+            QPushButton:pressed {
+                background-color: #9d174d;
+            }
+        """)
+
     def criar_componentes(self):
         componentes = {
             "nome": "Digite seu nome:",
